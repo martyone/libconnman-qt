@@ -1,0 +1,38 @@
+object at /, net.connman implements net.connman.Manager {
+    states {
+        Main
+    }
+
+    transition inside Main on method GetProperties {
+        reply ({
+            "State": <"offline">,
+            "OfflineMode": <false>,
+            "SessionMode": <true>,
+        });
+    }
+
+    transition inside Main on method GetTechnologies {
+        reply ([
+            (@o "/technology0", {
+                 "Powered": <true>,
+                 "Connected": <false>,
+                 "Name": <"Wi-Fi interface FOO">,
+                 "Type": <"wifi">,
+                 "Tethering": <false>,
+                 "TetheringIdentifier": <"foo-tether-identifier">,
+                 "TetheringPassphrase": <"foo-tether-passwd">,
+                 "IdleTimeout": <42>,
+            }),
+        ]);
+    }
+
+    transition inside Main on method GetServices {
+        reply (@a(oa{sv}) []);
+    }
+}
+
+object at /technology0 implements net.connman.Technology {
+    states {
+        Main
+    }
+}
