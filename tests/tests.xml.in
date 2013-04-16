@@ -17,6 +17,11 @@
                 <step>/opt/tests/connman-qt/runtest.sh ut_basic_with_technology</step>
             </case>
 
+            <case name="ut_basic_with_service">
+                <description>Single service, no technology</description>
+                <step>/opt/tests/connman-qt/runtest.sh ut_basic_with_service</step>
+            </case>
+
             <case name="ut_manager">
                 <description>tests the networkmanager class</description>
                 <step>@INSTALL_TESTDIR@/runtest.sh ut_manager</step>

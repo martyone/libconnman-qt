@@ -1,0 +1,96 @@
+object at /, net.connman implements net.connman.Manager {
+    states {
+        Main
+    }
+
+    transition inside Main on method GetProperties {
+        reply ({
+            "State": <"offline">,
+            "OfflineMode": <false>,
+            "SessionMode": <true>,
+        });
+    }
+
+    transition inside Main on method GetTechnologies {
+        reply (@a(oa{sv}) []);
+    }
+
+    transition inside Main on method GetServices {
+        reply ([
+            (@o "/service0", {
+                "State": <"failure">,
+                "Error": <"dhcp-error">,
+                "Name": <"Wireless BAR">,
+                "Type": <"wifi">,
+                "Security": <["none", "wep"]>,
+                "Strength": <42>,
+                "Favorite": <false>,
+                "Immutable": <true>,
+                "AutoConnect": <true>,
+                "Roaming": <true>,
+                "Nameservers": <["10.0.0.1", "10.0.0.2"]>,
+                "Nameservers.Configuration": <["127.0.0.1", "127.0.0.2"]>,
+                "Timeservers": <["time1.foo.org", "time2.foo.org"]>,
+                "Timeservers.Configuration": <["time1.foo.com", "time2.foo.com"]>,
+                "Domains": <["foo.org", "foo.com"]>,
+                "Domains.Configuration": <["bar.org", "bar.com"]>,
+                "IPv4": <{
+                    "Method": <"dhcp">,
+                    "Address": <"10.0.0.42">,
+                    "Netmask": <"255.255.255.0">,
+                    "Gateway": <"10.0.0.1">,
+                }>,
+                "IPv4.Configuration": <{
+                    "Method": <"manual">,
+                    "Address": <"10.0.42.42">,
+                    "Netmask": <"255.255.242.0">,
+                    "Gateway": <"10.0.42.1">,
+                }>,
+                "IPv6": <{
+                    "Method": <"dhcp">,
+                    "Address": <"fd30:84f5:4397:1676:d:e:a:d">,
+                    "PrefixLength": <64>,
+                    "Gateway": <"fd30:84f5:4397:1676:d:e:a:1">,
+                    "Privacy": <"prefered">,
+                }>,
+                "IPv6.Configuration": <{
+                    "Method": <"manual">,
+                    "Address": <"fd30:84f5:4397:1676:b:e:e:f">,
+                    "PrefixLength": <64>,
+                    "Gateway": <"fd30:84f5:4397:1676:b:e:e:1">,
+                    "Privacy": <"enabled">,
+                }>,
+                "Proxy": <{
+                    "Method": <"auto">,
+                    "URL": <"proxy.foo.org">,
+                    "Servers": <@as []>,
+                    "Excludes": <@as []>,
+                }>,
+                "Proxy.Configuration": <{
+                    "Method": <"manual">,
+                    "URL": <"">,
+                    "Servers": <["proxy42.foo.org"]>,
+                    "Excludes": <["drct1.org", "drct2.org"]>,
+                }>,
+                "Provider": <{
+                    "Host": <"42.42.42.42">,
+                    "Domain": <"42.org">,
+                    "Name": <"Fortytwo">,
+                    "Type": <"openvpn">,
+                }>,
+                "Ethernet": <{
+                    "Method": <"auto">,
+                    "Interface": <"eth123">,
+                    "Address": <"de:ad:be:ef:de:ad">,
+                    "MTU": <1542>,
+                }>,
+            }),
+        ]);
+    }
+}
+
+object at /service0 implements net.connman.Service {
+    states {
+        Main
+    }
+}

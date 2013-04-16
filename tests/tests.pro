@@ -5,6 +5,7 @@ SUBDIRS = \
     ut_agent.pro \
     ut_clock.pro \
     ut_basic.pro \
+    ut_basic_with_service.pro \
     ut_basic_with_technology.pro \
     ut_manager.pro \
     ut_service.pro \
