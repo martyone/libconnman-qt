@@ -7,6 +7,11 @@
 
             <description>General functionality tests</description>
 
+            <case name="ut_basic">
+                <description>No Technology nor service</description>
+                <step>/opt/tests/connman-qt/runtest.sh ut_basic</step>
+            </case>
+
             <case name="ut_manager">
                 <description>tests the networkmanager class</description>
                 <step>@INSTALL_TESTDIR@/runtest.sh ut_manager</step>

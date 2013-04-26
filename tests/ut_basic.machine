@@ -1,0 +1,40 @@
+object at /, net.connman implements net.connman.Manager {
+    data {
+        _OfflineMode = <false>;
+        _SessionMode = <true>;
+    }
+
+    states {
+        Main
+    }
+
+    transition inside Main on method GetProperties {
+        reply ({
+            "State": <"offline">,
+            "OfflineMode": object->_OfflineMode,
+            "SessionMode": object->_SessionMode,
+        });
+    }
+
+    transition inside Main on method GetTechnologies {
+        reply (@a(oa{sv}) []);
+    }
+
+    transition inside Main on method GetServices {
+        reply (@a(oa{sv}) []);
+    }
+
+    transition inside Main on method SetProperty {
+        precondition { name == "OfflineMode" }
+        object->_OfflineMode = value;
+        emit PropertyChanged (name, value);
+        reply ();
+    }
+
+    transition inside Main on method SetProperty {
+        precondition { name == "SessionMode" }
+        object->_SessionMode = value;
+        emit PropertyChanged (name, value);
+        reply ();
+    }
+}
